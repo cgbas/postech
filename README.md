@@ -14,3 +14,4 @@ Criar endpoints iniciais para uma aplicação de monitoração de eletroméstico
 - SpringData
 - Maven 3.1.1
 - Java17 (corretto)
+- Spring Actuator
