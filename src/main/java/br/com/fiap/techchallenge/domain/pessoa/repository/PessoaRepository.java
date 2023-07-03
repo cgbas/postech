@@ -13,28 +13,32 @@ public class PessoaRepository implements IPessoaRepository {
 
     public HashSet<Pessoa> findAll() {
         log.info(pessoas.toString());
+        log.info("Finding All" + pessoas);
         return pessoas;
     }
 
     public Optional<Pessoa> findById(Long id) {
         var pessoaById = pessoas.stream().filter(p -> p.getId().equals(id)).findFirst();
-        log.info(pessoaById.toString());
+        log.info("Finding by Id: " + pessoaById);
         return pessoaById;
     }
 
-    public Pessoa save(Pessoa p) {
-        p.setId(pessoas.size() + 1L);
-        pessoas.add(p);
-        return p;
+    public Pessoa save(Pessoa pessoa) {
+        pessoa.setId(pessoas.size() + 1L);
+        log.info("Saving: " +  pessoa);
+        pessoas.add(pessoa);
+        return pessoa;
     }
 
     public Pessoa update(Pessoa pessoa) {
         Pessoa pessoaUpdate = this.findById(pessoa.getId()).get();
         pessoaUpdate.setNome(pessoa.getNome()).setSexo(pessoa.getSexo()).setParentesco(pessoa.getParentesco()).setDataDeNascimento(pessoa.getDataDeNascimento());
+        log.info("Updating: " +  pessoaUpdate);
         return pessoaUpdate;
     }
 
     public void delete(Long id) {
+        log.info("Deleting ID: " + id);
         pessoas.removeIf(pessoa -> pessoa.getId().equals(id));
     }
 }

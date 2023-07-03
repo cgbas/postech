@@ -1,15 +1,15 @@
 package br.com.fiap.techchallenge.domain.eletrodomestico.repository;
 
-import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Eletrodomestico;
+import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Pessoa;
 
 import java.util.HashSet;
 import java.util.Optional;
 
 public interface IEletrodomesticoRepository {
 
-    public HashSet<Eletrodomestico> findAll();
-    public Optional<Eletrodomestico> findById(Long id);
-    public Eletrodomestico save(Eletrodomestico e);
-    public Eletrodomestico update(Eletrodomestico e);
-    public void delete(Long id);
+    HashSet<Pessoa> findAll();
+    Optional<Pessoa> findById(Long id);
+    Pessoa save(Pessoa e);
+    Pessoa update(Pessoa e);
+    void delete(Long id);
 }

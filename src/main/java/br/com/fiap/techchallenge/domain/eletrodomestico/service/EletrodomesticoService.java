@@ -1,8 +1,7 @@
 package br.com.fiap.techchallenge.domain.eletrodomestico.service;
 
-import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Eletrodomestico;
+import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Pessoa;
 import br.com.fiap.techchallenge.domain.eletrodomestico.repository.IEletrodomesticoRepository;
-import br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,14 +18,14 @@ public class EletrodomesticoService {
     @Autowired
     private IEletrodomesticoRepository repo;
 
-    public HashSet<Eletrodomestico> findAll() {
+    public HashSet<Pessoa> findAll() {
         return repo.findAll();
     }
 
-    public Optional<Eletrodomestico> findById(Long id) {
-        Optional<Eletrodomestico> eletrodomesticoBuscado = repo.findById(id);
+    public Optional<Pessoa> findById(Long id) {
+        Optional<Pessoa> eletrodomesticoBuscado = repo.findById(id);
         if (eletrodomesticoBuscado.isPresent()) {
-            Eletrodomestico eletrodomestico = eletrodomesticoBuscado.get();
+            Pessoa eletrodomestico = eletrodomesticoBuscado.get();
             return Optional.of(eletrodomestico);
         }
         log.error("Eletrodomestico não encontrado.");
@@ -34,13 +33,12 @@ public class EletrodomesticoService {
     }
 
 
-
-    public Eletrodomestico save(Eletrodomestico e) {
+    public Pessoa save(Pessoa e) {
         return repo.save(e);
     }
 
-    public Optional<Eletrodomestico> update(Eletrodomestico e) {
-        Optional<Eletrodomestico> eletrodomesticoBuscado = this.findById(e.getId());
+    public Optional<Pessoa> update(Pessoa e) {
+        Optional<Pessoa> eletrodomesticoBuscado = this.findById(e.getId());
         if (eletrodomesticoBuscado.isPresent()) {
            var eletrodomesticoAtualizado = repo.update(e);
            return Optional.of(eletrodomesticoAtualizado);
@@ -50,7 +48,7 @@ public class EletrodomesticoService {
     }
 
     public void delete(Long id) {
-        Optional<Eletrodomestico> eletrodomesticoDelete = this.findById(id);
+        Optional<Pessoa> eletrodomesticoDelete = this.findById(id);
         if (eletrodomesticoDelete.isPresent()){
             repo.delete(id);
         } else {

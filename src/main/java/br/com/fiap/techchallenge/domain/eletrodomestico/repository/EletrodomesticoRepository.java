@@ -1,6 +1,6 @@
 package br.com.fiap.techchallenge.domain.eletrodomestico.repository;
 
-import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Eletrodomestico;
+import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Pessoa;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -11,28 +11,28 @@ import java.util.Optional;
 @Slf4j
 public class EletrodomesticoRepository implements IEletrodomesticoRepository {
 
-    private static HashSet<Eletrodomestico> eletrodomesticos = new HashSet<Eletrodomestico>();
+    private static final HashSet<Pessoa> eletrodomesticos = new HashSet<>();
 
-    public HashSet<Eletrodomestico> findAll(){
-        log.info("Finding All");
+    public HashSet<Pessoa> findAll(){
+        log.info("Finding All" + eletrodomesticos);
         return eletrodomesticos;
     }
 
-    public Optional<Eletrodomestico> findById(Long id) {
-        var eletrodomesticoById = eletrodomesticos.stream().filter(e -> e.getId().equals(id)).findFirst();
-        log.info("Finding by Id: " + eletrodomesticoById.toString());
+    public Optional<Pessoa> findById(Long id) {
+        var eletrodomesticoById = eletrodomesticos.stream().filter(eletrodomestico -> eletrodomestico.getId().equals(id)).findFirst();
+        log.info("Finding by Id: " + eletrodomesticoById);
         return eletrodomesticoById;
     }
 
-    public  Eletrodomestico save(Eletrodomestico e) {
+    public Pessoa save(Pessoa e) {
         e.setId(eletrodomesticos.size() + 1L);
+        log.info("Saving: " +  e);
         eletrodomesticos.add(e);
-        log.info("Saving: " +  e.toString());
         return e;
     }
 
-    public Eletrodomestico update(Eletrodomestico eletrodomestico) {
-        Eletrodomestico eletrodomesticoUpdate = this.findById(eletrodomestico.getId()).get();
+    public Pessoa update(Pessoa eletrodomestico) {
+        Pessoa eletrodomesticoUpdate = this.findById(eletrodomestico.getId()).get();
         eletrodomesticoUpdate.setNome(eletrodomestico.getNome()).setModelo(eletrodomestico.getModelo()).setWatts(eletrodomestico.getWatts());
         log.info("Updating: " +  eletrodomesticoUpdate);
         return eletrodomesticoUpdate;
@@ -40,7 +40,7 @@ public class EletrodomesticoRepository implements IEletrodomesticoRepository {
 
     public void delete(Long id) {
         log.info("Deleting ID: " + id);
-        eletrodomesticos.remove(id);
+        eletrodomesticos.removeIf(eletrodomestico -> eletrodomestico.getId().equals(id));
     }
 
 }

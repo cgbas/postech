@@ -1,7 +1,6 @@
 package br.com.fiap.techchallenge.domain.eletrodomestico.controller;
 
-import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Eletrodomestico;
-import br.com.fiap.techchallenge.domain.eletrodomestico.repository.EletrodomesticoRepository;
+import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Pessoa;
 import br.com.fiap.techchallenge.domain.eletrodomestico.service.EletrodomesticoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,26 +17,26 @@ public class EletromesticosController {
     private EletrodomesticoService repo;
 
     @GetMapping
-    public ResponseEntity<HashSet<Eletrodomestico>> findAll() {
+    public ResponseEntity<HashSet<Pessoa>> findAll() {
         var eletrodomesticos = repo.findAll();
         return ResponseEntity.ok(eletrodomesticos);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Eletrodomestico>> findById(@PathVariable Long id) {
+    public ResponseEntity<Optional<Pessoa>> findById(@PathVariable Long id) {
         var eletrodomestico = repo.findById(id);
         return ResponseEntity.ok(eletrodomestico);
     }
 
     @PostMapping
-    public ResponseEntity<Eletrodomestico> save(@RequestBody Eletrodomestico e) {
+    public ResponseEntity<Pessoa> save(@RequestBody Pessoa e) {
         repo.save(e);
         return ResponseEntity.ok(e);
     }
 
     @PutMapping
-    public ResponseEntity<Optional<Eletrodomestico>> update(@RequestBody Eletrodomestico e) {
-        Optional<Eletrodomestico> eletrodomestico = repo.update(e);
+    public ResponseEntity<Optional<Pessoa>> update(@RequestBody Pessoa e) {
+        Optional<Pessoa> eletrodomestico = repo.update(e);
         return ResponseEntity.ok(eletrodomestico);
     }
 

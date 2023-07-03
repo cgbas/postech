@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Eletrodomestico {
+public class Pessoa {
 
     //TODO: Alterar para UUID
     @Id
@@ -18,21 +18,14 @@ public class Eletrodomestico {
     private String modelo;
     private int watts;
 
-    public Eletrodomestico() {
-    }
-
-    public Eletrodomestico(Long id, String nome, String modelo, int watts) {
-        this.id = id;
-        this.nome = nome;
-        this.modelo = modelo;
-        this.watts = watts;
+    public Pessoa() {
     }
 
     public Long getId() {
         return id;
     }
 
-    public Eletrodomestico setId(Long id) {
+    public Pessoa setId(Long id) {
         this.id = id;
         return this;
     }
@@ -41,7 +34,7 @@ public class Eletrodomestico {
         return nome;
     }
 
-    public Eletrodomestico setNome(String nome) {
+    public Pessoa setNome(String nome) {
         this.nome = nome;
         return this;
     }
@@ -50,7 +43,7 @@ public class Eletrodomestico {
         return modelo;
     }
 
-    public Eletrodomestico setModelo(String modelo) {
+    public Pessoa setModelo(String modelo) {
         this.modelo = modelo;
         return this;
     }
@@ -59,7 +52,7 @@ public class Eletrodomestico {
         return watts;
     }
 
-    public Eletrodomestico setWatts(int watts) {
+    public Pessoa setWatts(int watts) {
         this.watts = watts;
         return this;
     }
@@ -68,12 +61,22 @@ public class Eletrodomestico {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Eletrodomestico that = (Eletrodomestico) o;
+        Pessoa that = (Pessoa) o;
         return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Eletrodomestico{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", watts=" + watts +
+                '}';
     }
 }
