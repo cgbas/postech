@@ -13,7 +13,7 @@ public class PessoaRepository {
 
     public Set<Pessoa> findAll() {
         log.info(pessoas.toString());
-        return this.pessoas;
+        return pessoas;
     }
 
     public Optional<Pessoa> findById(Long id) {
@@ -30,7 +30,7 @@ public class PessoaRepository {
 
 
     public Optional<Pessoa> update(Pessoa p) {
-        Optional<Pessoa> pessoaOptional = this.findById(p.getId());
+        Optional<Pessoa> pessoaOptional = findById(p.getId());
 
         if (pessoaOptional.isPresent()) {
             Pessoa pessoa  = pessoaOptional.get();
@@ -47,6 +47,6 @@ public class PessoaRepository {
     }
 
     public void delete(Long id) {
-        pessoas.removeIf(pessoa -> pessoa.getId().equals(id));
+        pessoas.remove(id);
     }
 }
