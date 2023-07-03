@@ -11,7 +11,7 @@ public class PessoaRepository {
 
     private HashSet<Pessoa> pessoas = new HashSet<Pessoa>();
 
-    public Set<Pessoa> findAll() {
+    public HashSet<Pessoa> findAll() {
         log.info(pessoas.toString());
         return this.pessoas;
     }

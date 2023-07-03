@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.springframework.http.ResponseEntity.status;
 
@@ -19,9 +20,9 @@ public class PessoasController {
     private PessoaRepository repo;
 
     @GetMapping
-    public Collection<Pessoa> findAll(){
+    public ResponseEntity<HashSet<Pessoa>> findAll(){
         var pessoas = repo.findAll();
-        return pessoas;
+        return ResponseEntity.ok(pessoas);
     }
 
     @GetMapping("{id}")
@@ -31,9 +32,9 @@ public class PessoasController {
     }
 
     @PostMapping
-    public Pessoa save(@RequestBody Pessoa p){
+    public ResponseEntity<Pessoa> save(@RequestBody Pessoa p){
         repo.save(p);
-        return p;
+        return ResponseEntity.ok(p);
     }
 
     @PutMapping
