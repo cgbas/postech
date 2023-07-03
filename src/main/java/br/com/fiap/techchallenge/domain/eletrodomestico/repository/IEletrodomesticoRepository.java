@@ -10,6 +10,6 @@ public interface IEletrodomesticoRepository {
     public HashSet<Eletrodomestico> findAll();
     public Optional<Eletrodomestico> findById(Long id);
     public Eletrodomestico save(Eletrodomestico e);
-    public Optional<Eletrodomestico> update(Eletrodomestico e);
+    public Eletrodomestico update(Eletrodomestico e);
     public void delete(Long id);
 }

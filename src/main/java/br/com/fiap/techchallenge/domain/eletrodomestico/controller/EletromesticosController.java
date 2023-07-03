@@ -1,7 +1,8 @@
 package br.com.fiap.techchallenge.domain.eletrodomestico.controller;
 
 import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Eletrodomestico;
-import br.com.fiap.techchallenge.domain.eletrodomestico.repository.EletromesticoRepository;
+import br.com.fiap.techchallenge.domain.eletrodomestico.repository.EletrodomesticoRepository;
+import br.com.fiap.techchallenge.domain.eletrodomestico.service.EletrodomesticoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ import java.util.Optional;
 public class EletromesticosController {
 
     @Autowired
-    private EletromesticoRepository repo;
+    private EletrodomesticoService repo;
 
     @GetMapping
     public ResponseEntity<HashSet<Eletrodomestico>> findAll() {
