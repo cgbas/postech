@@ -32,7 +32,7 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public Long id() {
+    public Long getId() {
         return id;
     }
 
@@ -41,7 +41,7 @@ public class Pessoa {
         return this;
     }
 
-    public String nome() {
+    public String getNome() {
         return nome;
     }
 
@@ -50,7 +50,7 @@ public class Pessoa {
         return this;
     }
 
-    public LocalDate dataDeNascimento() {
+    public LocalDate getDataDeNascimento() {
         return dataDeNascimento;
     }
 
@@ -59,7 +59,7 @@ public class Pessoa {
         return this;
     }
 
-    public Sexo sexo() {
+    public Sexo getSexo() {
         return sexo;
     }
 
@@ -68,7 +68,7 @@ public class Pessoa {
         return this;
     }
 
-    public String parentesco() {
+    public String getParentesco() {
         return parentesco;
     }
 

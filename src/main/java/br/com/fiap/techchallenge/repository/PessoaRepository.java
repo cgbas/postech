@@ -1,38 +1,28 @@
 package br.com.fiap.techchallenge.repository;
 
 import br.com.fiap.techchallenge.domain.Pessoa;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-
-import java.time.LocalDate;
 import java.util.*;
 
 @Repository
+@Slf4j
 public class PessoaRepository {
 
-    static private Set<Pessoa> pessoas = new LinkedHashSet<Pessoa>();
+    private HashSet<Pessoa> pessoas = new HashSet<Pessoa>();
 
-    static {
-
-        Pessoa p1 = new Pessoa();
-        p1.setNome("Benefrancis do Nascimento").setDataDeNascimento(LocalDate.of(1977, 3, 8));
-
-        Pessoa p2 = new Pessoa();
-        p2.setNome("Bruno Sudré do Nascimento").setDataDeNascimento(LocalDate.of(2000, 5, 15));
-
-        save(p1);
-        save(p2);
+    public Set<Pessoa> findAll() {
+        log.info(pessoas.toString());
+        return this.pessoas;
     }
 
-    public Collection<Pessoa> findAll() {
-        return pessoas;
-    }
     public Optional<Pessoa> findById(Long id) {
-      return pessoas.stream().filter(p -> p.id().equals(id)).findFirst();
+        var pessoaById = pessoas.stream().filter(p -> p.getId().equals(id)).findFirst();
+        log.info(pessoaById.toString());
+        return pessoaById;
     }
 
-    public static Pessoa save(Pessoa p) {
+    public Pessoa save(Pessoa p) {
         p.setId(pessoas.size() + 1L);
         pessoas.add(p);
         return p;
@@ -40,21 +30,23 @@ public class PessoaRepository {
 
 
     public Optional<Pessoa> update(Pessoa p) {
-        Optional<Pessoa> pessoaBuscada = this.findById(p.id());
+        Optional<Pessoa> pessoaOptional = this.findById(p.getId());
 
-        if (pessoaBuscada.isPresent()) {
-            Pessoa pessoa  = pessoaBuscada.get();
+        if (pessoaOptional.isPresent()) {
+            Pessoa pessoa  = pessoaOptional.get();
             pessoa.
-                    setNome(p.nome()).
-                    setSexo(p.sexo()).
-                    setParentesco(p.parentesco()).
-                    setDataDeNascimento(p.dataDeNascimento());
+                    setNome(p.getNome()).
+                    setSexo(p.getSexo()).
+                    setParentesco(p.getParentesco()).
+                    setDataDeNascimento(p.getDataDeNascimento());
+
+            return Optional.of(pessoa);
         }
 
         return  Optional.empty();
     }
 
     public void delete(Long id) {
-        pessoas.removeIf(pessoa -> pessoa.id().equals(id));
+        pessoas.removeIf(pessoa -> pessoa.getId().equals(id));
     }
 }
