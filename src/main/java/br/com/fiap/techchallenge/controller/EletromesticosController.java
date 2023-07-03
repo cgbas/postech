@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.Optional;
 
 @RestController
@@ -17,9 +17,9 @@ public class EletromesticosController {
     private EletromesticoRepository repo;
 
     @GetMapping
-    public Collection<Eletrodomestico> findAll() {
+    public ResponseEntity<HashSet<Eletrodomestico>> findAll() {
         var eletrodomesticos = repo.findAll();
-        return eletrodomesticos;
+        return ResponseEntity.ok(eletrodomesticos);
     }
 
     @GetMapping("{id}")
@@ -29,9 +29,9 @@ public class EletromesticosController {
     }
 
     @PostMapping
-    public Eletrodomestico save(@RequestBody Eletrodomestico e) {
+    public ResponseEntity<Eletrodomestico> save(@RequestBody Eletrodomestico e) {
         repo.save(e);
-        return e;
+        return ResponseEntity.ok(e);
     }
 
     @PutMapping
