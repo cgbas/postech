@@ -1,7 +1,7 @@
 package br.com.fiap.techchallenge.domain.pessoa.controller;
 
 import br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa;
-import br.com.fiap.techchallenge.domain.pessoa.repository.PessoaRepository;
+import br.com.fiap.techchallenge.domain.pessoa.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,42 +9,41 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashSet;
 import java.util.Optional;
 
-import static org.springframework.http.ResponseEntity.status;
 
 @RestController
 @RequestMapping("/pessoas")
 public class PessoasController {
 
     @Autowired
-    private PessoaRepository repo;
+    private PessoaService service;
 
     @GetMapping
     public ResponseEntity<HashSet<Pessoa>> findAll(){
-        var pessoas = repo.findAll();
+        var pessoas = service.findAll();
         return ResponseEntity.ok(pessoas);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<Optional<Pessoa>> findById(@PathVariable Long id) {
-        var pessoa = repo.findById(id);
+        var pessoa = service.findById(id);
         return ResponseEntity.ok(pessoa);
     }
 
     @PostMapping
     public ResponseEntity<Pessoa> save(@RequestBody Pessoa p){
-        repo.save(p);
+        service.save(p);
         return ResponseEntity.ok(p);
     }
 
     @PutMapping
     public ResponseEntity<Optional<Pessoa>> update(@RequestBody Pessoa pessoa) {
-        Optional<Pessoa> p = repo.update(pessoa);
+        Optional<Pessoa> p = service.update(pessoa);
         return ResponseEntity.ok(p);
     }
 
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
-        repo.delete(id);
+        service.delete(id);
     }
 
 }

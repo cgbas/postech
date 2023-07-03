@@ -9,7 +9,7 @@ import java.util.*;
 @Slf4j
 public class PessoaRepository implements IPessoaRepository {
 
-    private static HashSet<Pessoa> pessoas = new HashSet<Pessoa>();
+    private static final HashSet<Pessoa> pessoas = new HashSet<>();
 
     public HashSet<Pessoa> findAll() {
         log.info(pessoas.toString());
@@ -29,24 +29,13 @@ public class PessoaRepository implements IPessoaRepository {
     }
 
 
-    public Optional<Pessoa> update(Pessoa p) {
-        Optional<Pessoa> pessoaOptional = findById(p.getId());
-
-        if (pessoaOptional.isPresent()) {
-            Pessoa pessoa  = pessoaOptional.get();
-            pessoa.
-                    setNome(p.getNome()).
-                    setSexo(p.getSexo()).
-                    setParentesco(p.getParentesco()).
-                    setDataDeNascimento(p.getDataDeNascimento());
-
-            return Optional.of(pessoa);
-        }
-
-        return  Optional.empty();
+    public Pessoa update(Pessoa pessoa) {
+        Pessoa pessoaUpdate = this.findById(pessoa.getId()).get();
+        pessoaUpdate.setNome(pessoa.getNome()).setSexo(pessoa.getSexo()).setParentesco(pessoa.getParentesco()).setDataDeNascimento(pessoa.getDataDeNascimento());
+        return pessoaUpdate;
     }
 
     public void delete(Long id) {
-        pessoas.remove(id);
+        pessoas.removeIf(pessoa -> pessoa.getId().equals(id));
     }
 }

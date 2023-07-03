@@ -6,12 +6,12 @@ import java.util.HashSet;
 import java.util.Optional;
 
 public interface IPessoaRepository {
-    public HashSet<Pessoa> findAll();
-    public Optional<Pessoa> findById(Long id);
+    HashSet<Pessoa> findAll();
+    Optional<Pessoa> findById(Long id);
 
-    public Pessoa save(Pessoa p);
-    public Optional<Pessoa> update(Pessoa p);
+    Pessoa save(Pessoa p);
+    Pessoa update(Pessoa p);
 
-    public void delete(Long id);
+    void delete(Long id);
 
 }
