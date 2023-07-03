@@ -5,8 +5,10 @@ import br.com.fiap.techchallenge.domain.pessoa.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.HashSet;
+import java.net.URI;
+import java.util.Collection;
 import java.util.Optional;
 
 
@@ -18,7 +20,7 @@ public class PessoasController {
     private PessoaService service;
 
     @GetMapping
-    public ResponseEntity<HashSet<Pessoa>> findAll(){
+    public ResponseEntity<Collection<Pessoa>> findAll(){
         var pessoas = service.findAll();
         return ResponseEntity.ok(pessoas);
     }
@@ -30,15 +32,17 @@ public class PessoasController {
     }
 
     @PostMapping
-    public ResponseEntity<Pessoa> save(@RequestBody Pessoa p){
-        service.save(p);
-        return ResponseEntity.ok(p);
+    public ResponseEntity<Pessoa> save(@RequestBody Pessoa pessoa){
+        var produtoSaved = service.save(pessoa);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(produtoSaved.getId()).toUri();
+        return ResponseEntity.created(uri).body(produtoSaved);
     }
 
     @PutMapping
     public ResponseEntity<Optional<Pessoa>> update(@RequestBody Pessoa pessoa) {
-        Optional<Pessoa> p = service.update(pessoa);
-        return ResponseEntity.ok(p);
+        Optional<Pessoa> pessoaUpdate = service.update(pessoa);
+        return ResponseEntity.ok(pessoaUpdate);
     }
 
     @DeleteMapping("{id}")

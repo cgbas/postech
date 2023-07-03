@@ -28,7 +28,6 @@ public class PessoaRepository implements IPessoaRepository {
         return p;
     }
 
-
     public Pessoa update(Pessoa pessoa) {
         Pessoa pessoaUpdate = this.findById(pessoa.getId()).get();
         pessoaUpdate.setNome(pessoa.getNome()).setSexo(pessoa.getSexo()).setParentesco(pessoa.getParentesco()).setDataDeNascimento(pessoa.getDataDeNascimento());
