@@ -1,16 +1,16 @@
-package br.com.fiap.techchallenge.domain;
+package br.com.fiap.techchallenge.domain.eletrodomestico.entity;
 
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import lombok.*;
 
 import java.util.Objects;
 
 @Entity
 public class Eletrodomestico {
 
+    //TODO: Alterar para UUID
     @Id
     @GeneratedValue
     private Long id;
