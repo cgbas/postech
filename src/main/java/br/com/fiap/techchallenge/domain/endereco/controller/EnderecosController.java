@@ -1,8 +1,8 @@
-package br.com.fiap.techchallenge.controller;
+package br.com.fiap.techchallenge.domain.endereco.controller;
 
 
-import br.com.fiap.techchallenge.domain.Endereco;
-import br.com.fiap.techchallenge.repository.EnderecoRepository;
+import br.com.fiap.techchallenge.domain.endereco.entity.Endereco;
+import br.com.fiap.techchallenge.domain.endereco.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,7 @@
-package br.com.fiap.techchallenge.repository;
+package br.com.fiap.techchallenge.domain.eletrodomestico.repository;
 
-import br.com.fiap.techchallenge.domain.Eletrodomestico;
+import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Eletrodomestico;
+import br.com.fiap.techchallenge.domain.endereco.repository.IEnderecoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -9,9 +10,9 @@ import java.util.Optional;
 
 @Repository
 @Slf4j
-public class EletromesticoRepository {
+public class EletromesticoRepository implements IEletrodomesticoRepository {
 
-    private HashSet<Eletrodomestico> eletrodomesticos = new HashSet<Eletrodomestico>();
+    private static HashSet<Eletrodomestico> eletrodomesticos = new HashSet<Eletrodomestico>();
 
     public HashSet<Eletrodomestico> findAll(){
         log.info(eletrodomesticos.toString());

@@ -1,14 +1,13 @@
-package br.com.fiap.techchallenge.controller;
+package br.com.fiap.techchallenge.domain.pessoa.controller;
 
-import br.com.fiap.techchallenge.domain.Pessoa;
-import br.com.fiap.techchallenge.repository.PessoaRepository;
+import br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa;
+import br.com.fiap.techchallenge.domain.pessoa.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.springframework.http.ResponseEntity.status;
 

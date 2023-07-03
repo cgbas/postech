@@ -1,7 +1,7 @@
-package br.com.fiap.techchallenge.controller;
+package br.com.fiap.techchallenge.domain.eletrodomestico.controller;
 
-import br.com.fiap.techchallenge.domain.Eletrodomestico;
-import br.com.fiap.techchallenge.repository.EletromesticoRepository;
+import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Eletrodomestico;
+import br.com.fiap.techchallenge.domain.eletrodomestico.repository.EletromesticoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

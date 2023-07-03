@@ -1,11 +1,10 @@
-package br.com.fiap.techchallenge.domain;
+package br.com.fiap.techchallenge.domain.pessoa.entity;
 
-import br.com.fiap.techchallenge.enums.Sexo;
+import br.com.fiap.techchallenge.domain.pessoa.enums.Sexo;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -13,6 +12,7 @@ import java.util.Objects;
 @Entity
 public class Pessoa {
 
+    //TODO: Alterar para UUID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

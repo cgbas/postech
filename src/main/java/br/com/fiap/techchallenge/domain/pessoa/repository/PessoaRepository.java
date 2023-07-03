@@ -1,15 +1,15 @@
-package br.com.fiap.techchallenge.repository;
+package br.com.fiap.techchallenge.domain.pessoa.repository;
 
-import br.com.fiap.techchallenge.domain.Pessoa;
+import br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import java.util.*;
 
 @Repository
 @Slf4j
-public class PessoaRepository {
+public class PessoaRepository implements IPessoaRepository {
 
-    private HashSet<Pessoa> pessoas = new HashSet<Pessoa>();
+    private static HashSet<Pessoa> pessoas = new HashSet<Pessoa>();
 
     public HashSet<Pessoa> findAll() {
         log.info(pessoas.toString());

@@ -1,18 +1,16 @@
-package br.com.fiap.techchallenge.repository;
+package br.com.fiap.techchallenge.domain.endereco.repository;
 
-import br.com.fiap.techchallenge.domain.Endereco;
-import br.com.fiap.techchallenge.domain.Pessoa;
+import br.com.fiap.techchallenge.domain.endereco.entity.Endereco;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
 import java.util.HashSet;
 import java.util.Optional;
 @Slf4j
 @Repository
-public class EnderecoRepository {
+public class EnderecoRepository implements IEnderecoRepository {
 
-    private HashSet<Endereco> repo = new HashSet<Endereco>();
+    private static HashSet<Endereco> repo = new HashSet<Endereco>();
     public HashSet<Endereco> findAll() {
         return repo;
     }
