@@ -17,12 +17,12 @@ public class PessoaService {
     @Autowired
     private IPessoaRepository repo;
 
-    public HashSet<br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa> findAll(){
+    public HashSet<Pessoa> findAll(){
         return repo.findAll();
     }
 
-    public Optional<br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa> findById(Long id){
-        Optional<br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa> pessoaBuscada = repo.findById(id);
+    public Optional<Pessoa> findById(Long id){
+        Optional<Pessoa> pessoaBuscada = repo.findById(id);
         if (pessoaBuscada.isPresent()){
             br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa pessoa = pessoaBuscada.get();
 
@@ -32,12 +32,12 @@ public class PessoaService {
         return Optional.empty();
     }
 
-    public br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa save(br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa pessoa){
+    public Pessoa save(br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa pessoa){
        return  repo.save(pessoa);
     }
 
-    public Optional<br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa> update(br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa pessoa) {
-        Optional<br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa> pessoaBuscada = this.findById(pessoa.getId());
+    public Optional<Pessoa> update(br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa pessoa) {
+        Optional<Pessoa> pessoaBuscada = this.findById(pessoa.getId());
         if (pessoaBuscada.isPresent()) {
             var pessoaAtualizada = repo.update(pessoa);
             return Optional.of(pessoaAtualizada);

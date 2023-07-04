@@ -12,7 +12,6 @@ public class PessoaRepository implements IPessoaRepository {
     private static final HashSet<Pessoa> pessoas = new HashSet<>();
 
     public HashSet<Pessoa> findAll() {
-        log.info(pessoas.toString());
         log.info("Finding All" + pessoas);
         return pessoas;
     }
@@ -32,8 +31,13 @@ public class PessoaRepository implements IPessoaRepository {
 
     public Pessoa update(Pessoa pessoa) {
         Pessoa pessoaUpdate = this.findById(pessoa.getId()).get();
-        pessoaUpdate.setNome(pessoa.getNome()).setSexo(pessoa.getSexo()).setParentesco(pessoa.getParentesco()).setDataDeNascimento(pessoa.getDataDeNascimento());
         log.info("Updating: " +  pessoaUpdate);
+        pessoaUpdate
+                .setNome(pessoa.getNome())
+                .setSexo(pessoa.getSexo())
+                .setParentesco(pessoa.getParentesco())
+                .setDataDeNascimento(pessoa.getDataDeNascimento());
+
         return pessoaUpdate;
     }
 

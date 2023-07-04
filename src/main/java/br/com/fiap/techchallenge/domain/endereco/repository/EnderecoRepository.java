@@ -10,41 +10,40 @@ import java.util.Optional;
 @Repository
 public class EnderecoRepository implements IEnderecoRepository {
 
-    private static HashSet<Endereco> repo = new HashSet<Endereco>();
+    private static final HashSet<Endereco> enderecos = new HashSet<>();
     public HashSet<Endereco> findAll() {
-        return repo;
+        log.info("Finding All" + enderecos);
+        return enderecos;
     }
 
     public Optional<Endereco> findById(Long id) {
-        var enderecoById = repo.stream().filter(e -> e.getId().equals(id)).findFirst();
-        log.info(enderecoById.toString());
+        var enderecoById = enderecos.stream().filter(e -> e.getId().equals(id)).findFirst();
+        log.info("Finding by Id: " + enderecoById);
         return enderecoById;
     }
 
     public Endereco save(Endereco e) {
-        e.setId(repo.size() + 1L);
-        repo.add(e);
+        e.setId(enderecos.size() + 1L);
+        log.info("Saving: " + e);
+        enderecos.add(e);
         return e;
     }
 
-    public Optional<Endereco> update(Endereco e) {
-        Optional<Endereco> enderecoOptional = findById(e.getId());
-
-        if (enderecoOptional.isPresent()) {
-            Endereco endereco = enderecoOptional.get()
+    public Endereco update(Endereco e) {
+        Endereco enderecoUpdate = this.findById(e.getId()).get();
+        log.info("Updating" + enderecoUpdate);
+        enderecoUpdate
                     .setLogradouro(e.getLogradouro())
                     .setNumero(e.getNumero())
                     .setBairro(e.getBairro())
                     .setCidade(e.getCidade())
                     .setEstado(e.getEstado());
 
-            return Optional.of(endereco);
-        }
-
-        return Optional.empty();
+        return enderecoUpdate;
     }
 
     public void delete(Long id) {
-        repo.remove(id);
+        log.info("Deleting ID: " + id);
+        enderecos.removeIf(endereco -> endereco.getId().equals(id));
     }
 }

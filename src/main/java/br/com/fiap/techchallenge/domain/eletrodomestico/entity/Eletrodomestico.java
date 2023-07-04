@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Pessoa {
+public class Eletrodomestico {
 
     //TODO: Alterar para UUID
     @Id
@@ -18,14 +18,14 @@ public class Pessoa {
     private String modelo;
     private int watts;
 
-    public Pessoa() {
+    public Eletrodomestico() {
     }
 
     public Long getId() {
         return id;
     }
 
-    public Pessoa setId(Long id) {
+    public Eletrodomestico setId(Long id) {
         this.id = id;
         return this;
     }
@@ -34,7 +34,7 @@ public class Pessoa {
         return nome;
     }
 
-    public Pessoa setNome(String nome) {
+    public Eletrodomestico setNome(String nome) {
         this.nome = nome;
         return this;
     }
@@ -43,7 +43,7 @@ public class Pessoa {
         return modelo;
     }
 
-    public Pessoa setModelo(String modelo) {
+    public Eletrodomestico setModelo(String modelo) {
         this.modelo = modelo;
         return this;
     }
@@ -52,7 +52,7 @@ public class Pessoa {
         return watts;
     }
 
-    public Pessoa setWatts(int watts) {
+    public Eletrodomestico setWatts(int watts) {
         this.watts = watts;
         return this;
     }
@@ -61,7 +61,7 @@ public class Pessoa {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pessoa that = (Pessoa) o;
+        Eletrodomestico that = (Eletrodomestico) o;
         return Objects.equals(id, that.id);
     }
 

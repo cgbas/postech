@@ -1,6 +1,6 @@
 package br.com.fiap.techchallenge.domain.eletrodomestico.service;
 
-import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Pessoa;
+import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Eletrodomestico;
 import br.com.fiap.techchallenge.domain.eletrodomestico.repository.IEletrodomesticoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +18,14 @@ public class EletrodomesticoService {
     @Autowired
     private IEletrodomesticoRepository repo;
 
-    public HashSet<Pessoa> findAll() {
+    public HashSet<Eletrodomestico> findAll() {
         return repo.findAll();
     }
 
-    public Optional<Pessoa> findById(Long id) {
-        Optional<Pessoa> eletrodomesticoBuscado = repo.findById(id);
+    public Optional<Eletrodomestico> findById(Long id) {
+        Optional<Eletrodomestico> eletrodomesticoBuscado = repo.findById(id);
         if (eletrodomesticoBuscado.isPresent()) {
-            Pessoa eletrodomestico = eletrodomesticoBuscado.get();
+            Eletrodomestico eletrodomestico = eletrodomesticoBuscado.get();
             return Optional.of(eletrodomestico);
         }
         log.error("Eletrodomestico não encontrado.");
@@ -33,12 +33,12 @@ public class EletrodomesticoService {
     }
 
 
-    public Pessoa save(Pessoa e) {
+    public Eletrodomestico save(Eletrodomestico e) {
         return repo.save(e);
     }
 
-    public Optional<Pessoa> update(Pessoa e) {
-        Optional<Pessoa> eletrodomesticoBuscado = this.findById(e.getId());
+    public Optional<Eletrodomestico> update(Eletrodomestico e) {
+        Optional<Eletrodomestico> eletrodomesticoBuscado = this.findById(e.getId());
         if (eletrodomesticoBuscado.isPresent()) {
            var eletrodomesticoAtualizado = repo.update(e);
            return Optional.of(eletrodomesticoAtualizado);
@@ -48,7 +48,7 @@ public class EletrodomesticoService {
     }
 
     public void delete(Long id) {
-        Optional<Pessoa> eletrodomesticoDelete = this.findById(id);
+        Optional<Eletrodomestico> eletrodomesticoDelete = this.findById(id);
         if (eletrodomesticoDelete.isPresent()){
             repo.delete(id);
         } else {

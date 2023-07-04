@@ -1,6 +1,6 @@
 package br.com.fiap.techchallenge.domain.eletrodomestico.controller;
 
-import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Pessoa;
+import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Eletrodomestico;
 import br.com.fiap.techchallenge.domain.eletrodomestico.service.EletrodomesticoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,34 +14,35 @@ import java.util.Optional;
 public class EletromesticosController {
 
     @Autowired
-    private EletrodomesticoService repo;
+    private EletrodomesticoService service;
 
     @GetMapping
-    public ResponseEntity<HashSet<Pessoa>> findAll() {
-        var eletrodomesticos = repo.findAll();
+    public ResponseEntity<HashSet<Eletrodomestico>> findAll() {
+        var eletrodomesticos = service.findAll();
         return ResponseEntity.ok(eletrodomesticos);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Pessoa>> findById(@PathVariable Long id) {
-        var eletrodomestico = repo.findById(id);
+    public ResponseEntity<Optional<Eletrodomestico>> findById(@PathVariable Long id) {
+        var eletrodomestico = service.findById(id);
         return ResponseEntity.ok(eletrodomestico);
     }
 
     @PostMapping
-    public ResponseEntity<Pessoa> save(@RequestBody Pessoa e) {
-        repo.save(e);
+    public ResponseEntity<Eletrodomestico> save(@RequestBody Eletrodomestico e) {
+        service.save(e);
         return ResponseEntity.ok(e);
     }
 
     @PutMapping
-    public ResponseEntity<Optional<Pessoa>> update(@RequestBody Pessoa e) {
-        Optional<Pessoa> eletrodomestico = repo.update(e);
+    public ResponseEntity<Optional<Eletrodomestico>> update(@RequestBody Eletrodomestico e) {
+        Optional<Eletrodomestico> eletrodomestico = service.update(e);
         return ResponseEntity.ok(eletrodomestico);
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
-        repo.delete(id);
+    public ResponseEntity delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
