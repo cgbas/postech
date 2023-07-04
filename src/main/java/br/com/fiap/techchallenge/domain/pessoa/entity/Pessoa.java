@@ -3,40 +3,32 @@ package br.com.fiap.techchallenge.domain.pessoa.entity;
 import br.com.fiap.techchallenge.domain.pessoa.enums.Sexo;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 public class Pessoa {
 
-    //TODO: Alterar para UUID
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private UUID id;
     private String nome;
     private LocalDate dataDeNascimento;
     private Sexo sexo;
     private String parentesco;
 
-    public Pessoa(Long id, String nome, LocalDate dataDeNascimento, Sexo sexo, String parentesco) {
-        this.id = id;
-        this.nome = nome;
-        this.dataDeNascimento = dataDeNascimento;
-        this.sexo = sexo;
-        this.parentesco = parentesco;
-    }
 
     public Pessoa() {
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public Pessoa setId(Long id) {
+    public Pessoa setId(UUID id) {
         this.id = id;
         return this;
     }

@@ -4,12 +4,13 @@ import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Eletrodomestico;
 
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface IEletrodomesticoRepository {
 
-    public HashSet<Eletrodomestico> findAll();
-    public Optional<Eletrodomestico> findById(Long id);
-    public Eletrodomestico save(Eletrodomestico e);
-    public Optional<Eletrodomestico> update(Eletrodomestico e);
-    public void delete(Long id);
+    HashSet<Eletrodomestico> findAll();
+    Optional<Eletrodomestico> findById(UUID id);
+    Eletrodomestico save(Eletrodomestico e);
+    Eletrodomestico update(Eletrodomestico e);
+    void delete(UUID id);
 }
