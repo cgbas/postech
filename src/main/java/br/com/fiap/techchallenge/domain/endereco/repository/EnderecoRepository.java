@@ -5,25 +5,28 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Optional;
+import java.util.UUID;
+
 @Slf4j
 @Repository
 public class EnderecoRepository implements IEnderecoRepository {
 
-    private static final HashSet<Endereco> enderecos = new HashSet<>();
+    private static final LinkedHashSet<Endereco> enderecos = new LinkedHashSet<>();
     public HashSet<Endereco> findAll() {
         log.info("Finding All" + enderecos);
         return enderecos;
     }
 
-    public Optional<Endereco> findById(Long id) {
+    public Optional<Endereco> findById(UUID id) {
         var enderecoById = enderecos.stream().filter(e -> e.getId().equals(id)).findFirst();
         log.info("Finding by Id: " + enderecoById);
         return enderecoById;
     }
 
     public Endereco save(Endereco e) {
-        e.setId(enderecos.size() + 1L);
+        e.setId(UUID.randomUUID());
         log.info("Saving: " + e);
         enderecos.add(e);
         return e;
@@ -42,7 +45,7 @@ public class EnderecoRepository implements IEnderecoRepository {
         return enderecoUpdate;
     }
 
-    public void delete(Long id) {
+    public void delete(UUID id) {
         log.info("Deleting ID: " + id);
         enderecos.removeIf(endereco -> endereco.getId().equals(id));
     }

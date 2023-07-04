@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/eletrodomesticos")
@@ -23,7 +24,7 @@ public class EletromesticosController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Eletrodomestico>> findById(@PathVariable Long id) {
+    public ResponseEntity<Optional<Eletrodomestico>> findById(@PathVariable UUID id) {
         var eletrodomestico = service.findById(id);
         return ResponseEntity.ok(eletrodomestico);
     }
@@ -41,7 +42,7 @@ public class EletromesticosController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity delete(@PathVariable UUID id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.util.Collection;
 import java.util.Optional;
+import java.util.UUID;
+
 @Slf4j
 @Service
 public class PessoaService {
@@ -17,11 +19,11 @@ public class PessoaService {
     @Autowired
     private IPessoaRepository repo;
 
-    public HashSet<Pessoa> findAll(){
+    public Collection<Pessoa> findAll(){
         return repo.findAll();
     }
 
-    public Optional<Pessoa> findById(Long id){
+    public Optional<Pessoa> findById(UUID id){
         Optional<Pessoa> pessoaBuscada = repo.findById(id);
         if (pessoaBuscada.isPresent()){
             br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa pessoa = pessoaBuscada.get();
@@ -47,7 +49,7 @@ public class PessoaService {
     }
 
 
-    public void delete(Long id) {
+    public void delete(UUID id) {
         Optional<Pessoa> pessoaDelete = this.findById(id);
         if (pessoaDelete.isPresent()){
             repo.delete(id);

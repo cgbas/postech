@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -22,7 +23,7 @@ public class EnderecoService {
         return repo.findAll();
     }
 
-    public Optional<Endereco> findById(Long id){
+    public Optional<Endereco> findById(UUID id){
         Optional<Endereco> enderecoBuscado = repo.findById(id);
         if (enderecoBuscado.isPresent()){
             Endereco endereco = enderecoBuscado.get();
@@ -48,7 +49,7 @@ public class EnderecoService {
     }
 
 
-    public void delete(Long id) {
+    public void delete(UUID id) {
         Optional<Endereco> enderecoDelete = this.findById(id);
         if (enderecoDelete.isPresent()){
             repo.delete(id);

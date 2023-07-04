@@ -3,27 +3,31 @@ package br.com.fiap.techchallenge.domain.pessoa.repository;
 import br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-import java.util.*;
+
+import java.util.LinkedHashSet;
+import java.util.Optional;
+import java.util.UUID;
+
 
 @Repository
 @Slf4j
 public class PessoaRepository implements IPessoaRepository {
 
-    private static final HashSet<Pessoa> pessoas = new HashSet<>();
+    private static final LinkedHashSet<Pessoa> pessoas = new LinkedHashSet<>();
 
-    public HashSet<Pessoa> findAll() {
+    public LinkedHashSet<Pessoa> findAll() {
         log.info("Finding All" + pessoas);
         return pessoas;
     }
 
-    public Optional<Pessoa> findById(Long id) {
+    public Optional<Pessoa> findById(UUID id) {
         var pessoaById = pessoas.stream().filter(p -> p.getId().equals(id)).findFirst();
         log.info("Finding by Id: " + pessoaById);
         return pessoaById;
     }
 
     public Pessoa save(Pessoa pessoa) {
-        pessoa.setId(pessoas.size() + 1L);
+        pessoa.setId(UUID.randomUUID());
         log.info("Saving: " +  pessoa);
         pessoas.add(pessoa);
         return pessoa;
@@ -41,7 +45,7 @@ public class PessoaRepository implements IPessoaRepository {
         return pessoaUpdate;
     }
 
-    public void delete(Long id) {
+    public void delete(UUID id) {
         log.info("Deleting ID: " + id);
         pessoas.removeIf(pessoa -> pessoa.getId().equals(id));
     }

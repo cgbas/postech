@@ -4,14 +4,15 @@ import br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa;
 
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface IPessoaRepository {
     HashSet<Pessoa> findAll();
-    Optional<Pessoa> findById(Long id);
+    Optional<Pessoa> findById(UUID id);
 
     Pessoa save(Pessoa p);
     Pessoa update(Pessoa p);
 
-    void delete(Long id);
+    void delete(UUID id);
 
 }

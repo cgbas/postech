@@ -6,15 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 public class Endereco {
 
-
-    //TODO: Alterar para UUID
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
     private String logradouro;
     private int numero;
     private String bairro;
@@ -24,11 +23,11 @@ public class Endereco {
     public Endereco() {
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public Endereco setId(Long id) {
+    public Endereco setId(UUID id) {
         this.id = id;
         return this;
     }

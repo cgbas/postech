@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.UUID;
+
 @Slf4j
 @Service
 public class EletrodomesticoService {
@@ -22,7 +24,7 @@ public class EletrodomesticoService {
         return repo.findAll();
     }
 
-    public Optional<Eletrodomestico> findById(Long id) {
+    public Optional<Eletrodomestico> findById(UUID id) {
         Optional<Eletrodomestico> eletrodomesticoBuscado = repo.findById(id);
         if (eletrodomesticoBuscado.isPresent()) {
             Eletrodomestico eletrodomestico = eletrodomesticoBuscado.get();
@@ -47,7 +49,7 @@ public class EletrodomesticoService {
         return Optional.empty();
     }
 
-    public void delete(Long id) {
+    public void delete(UUID id) {
         Optional<Eletrodomestico> eletrodomesticoDelete = this.findById(id);
         if (eletrodomesticoDelete.isPresent()){
             repo.delete(id);

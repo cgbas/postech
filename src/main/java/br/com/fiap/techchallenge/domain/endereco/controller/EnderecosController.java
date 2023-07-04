@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/enderecos")
@@ -24,7 +25,7 @@ public class EnderecosController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Endereco>> findById(@PathVariable Long id) {
+    public ResponseEntity<Optional<Endereco>> findById(@PathVariable UUID id) {
         var endereco = service.findById(id);
         return ResponseEntity.ok(endereco);
     }
@@ -42,7 +43,7 @@ public class EnderecosController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity delete(@PathVariable UUID id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

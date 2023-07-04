@@ -10,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @RestController
@@ -26,7 +27,7 @@ public class PessoasController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Pessoa>> findById(@PathVariable Long id) {
+    public ResponseEntity<Optional<Pessoa>> findById(@PathVariable UUID id) {
         var pessoa = service.findById(id);
         return ResponseEntity.ok(pessoa);
     }
@@ -46,7 +47,7 @@ public class PessoasController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity delete(@PathVariable UUID id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

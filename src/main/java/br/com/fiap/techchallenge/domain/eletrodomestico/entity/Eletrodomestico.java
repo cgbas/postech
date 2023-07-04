@@ -6,14 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 public class Eletrodomestico {
 
-    //TODO: Alterar para UUID
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
     private String nome;
     private String modelo;
     private int watts;
@@ -21,11 +21,11 @@ public class Eletrodomestico {
     public Eletrodomestico() {
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public Eletrodomestico setId(Long id) {
+    public Eletrodomestico setId(UUID id) {
         this.id = id;
         return this;
     }
