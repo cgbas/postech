@@ -1,19 +1,18 @@
 package br.com.fiap.techchallenge.domain.pessoa.entity;
 
 import br.com.fiap.techchallenge.domain.pessoa.enums.Sexo;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity
+@Table(name = "tb_pessoa")
 public class Pessoa {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String nome;
     private LocalDate dataDeNascimento;

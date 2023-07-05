@@ -34,15 +34,15 @@ public class PessoasController {
 
     @PostMapping
     public ResponseEntity<Pessoa> save(@RequestBody Pessoa pessoa){
-        var produtoSaved = service.save(pessoa);
+        var savePessoa = service.save(pessoa);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(produtoSaved.getId()).toUri();
-        return ResponseEntity.created(uri).body(produtoSaved);
+                .path("/{id}").buildAndExpand(savePessoa.getId()).toUri();
+        return ResponseEntity.created(uri).body(savePessoa);
     }
 
-    @PutMapping
-    public ResponseEntity<Optional<Pessoa>> update(@RequestBody Pessoa pessoa) {
-        Optional<Pessoa> pessoaUpdate = service.update(pessoa);
+    @PutMapping("{id}")
+    public ResponseEntity<Pessoa> update(@PathVariable UUID id, @RequestBody Pessoa pessoa) {
+        var pessoaUpdate = service.update(id, pessoa);
         return ResponseEntity.ok(pessoaUpdate);
     }
 
