@@ -34,7 +34,8 @@ public class EnderecoService {
                 .setLogradouro(endereco.getLogradouro())
                 .setNumero(endereco.getNumero())
                 .setBairro(endereco.getBairro())
-                .setCidade(endereco.getCidade());
+                .setCidade(endereco.getCidade())
+                .setEstado(endereco.getEstado());
 
         salvaEndereco = repo.save(salvaEndereco);
         return new EnderecoDTO(salvaEndereco);
