@@ -1,18 +1,17 @@
 package br.com.fiap.techchallenge.domain.eletrodomestico.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity
+@Table(name = "tb_eletrodomesticos")
 public class Eletrodomestico {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String nome;
     private String modelo;

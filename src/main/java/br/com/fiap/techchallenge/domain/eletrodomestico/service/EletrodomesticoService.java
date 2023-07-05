@@ -4,10 +4,8 @@ import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Eletrodomestico;
 import br.com.fiap.techchallenge.domain.eletrodomestico.repository.IEletrodomesticoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,17 +13,15 @@ import java.util.UUID;
 @Service
 public class EletrodomesticoService {
 
-
-    @Qualifier("eletrodomesticoRepository")
     @Autowired
-    private IEletrodomesticoRepository repo;
+    private IEletrodomesticoRepository service;
 
-    public HashSet<Eletrodomestico> findAll() {
-        return repo.findAll();
+    public Collection<Eletrodomestico> findAll() {
+        return service.findAll();
     }
 
     public Optional<Eletrodomestico> findById(UUID id) {
-        Optional<Eletrodomestico> eletrodomesticoBuscado = repo.findById(id);
+        Optional<Eletrodomestico> eletrodomesticoBuscado = service.findById(id);
         if (eletrodomesticoBuscado.isPresent()) {
             Eletrodomestico eletrodomestico = eletrodomesticoBuscado.get();
             return Optional.of(eletrodomestico);
@@ -35,27 +31,21 @@ public class EletrodomesticoService {
     }
 
 
-    public Eletrodomestico save(Eletrodomestico e) {
-        return repo.save(e);
+    public Eletrodomestico save(Eletrodomestico eletrodomestico) {
+        return service.save(eletrodomestico);
     }
 
-    public Optional<Eletrodomestico> update(Eletrodomestico e) {
-        Optional<Eletrodomestico> eletrodomesticoBuscado = this.findById(e.getId());
-        if (eletrodomesticoBuscado.isPresent()) {
-           var eletrodomesticoAtualizado = repo.update(e);
-           return Optional.of(eletrodomesticoAtualizado);
-        }
-        log.error("Eletrodomestico não encontrado.");
-        return Optional.empty();
+    public Eletrodomestico update(UUID id, Eletrodomestico eletrodomestico) {
+        var buscaEletrodomestico = service.getReferenceById(id);
+        buscaEletrodomestico
+                .setNome(eletrodomestico.getNome())
+                .setModelo(eletrodomestico.getModelo())
+                .setWatts(eletrodomestico.getWatts());
+        buscaEletrodomestico = service.save(buscaEletrodomestico);
+        return buscaEletrodomestico;
     }
 
     public void delete(UUID id) {
-        Optional<Eletrodomestico> eletrodomesticoDelete = this.findById(id);
-        if (eletrodomesticoDelete.isPresent()){
-            repo.delete(id);
-        } else {
-            log.error("Eletrodomestico não encontrado");
-        }
-
+        service.deleteById(id);
     }
 }

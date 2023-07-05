@@ -6,8 +6,10 @@ import br.com.fiap.techchallenge.domain.endereco.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.HashSet;
+import java.net.URI;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,7 +21,7 @@ public class EnderecosController {
     private EnderecoService service;
 
     @GetMapping
-    public ResponseEntity<HashSet<Endereco>> findAll() {
+    public ResponseEntity<Collection<Endereco>> findAll() {
         var enderecos = service.findAll();
         return ResponseEntity.ok(enderecos);
     }
@@ -31,15 +33,17 @@ public class EnderecosController {
     }
 
     @PostMapping
-    public ResponseEntity<Endereco> save(@RequestBody Endereco e) {
-        service.save(e);
-        return ResponseEntity.ok(e);
+    public ResponseEntity<Endereco> save(@RequestBody Endereco endereco) {
+        var saveEndereco = service.save(endereco);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(saveEndereco.getId()).toUri();
+        return ResponseEntity.created(uri).body(saveEndereco);
     }
 
-    @PutMapping
-    public ResponseEntity<Optional<Endereco>> update(@RequestBody Endereco e) {
-        Optional<Endereco> endereco = service.update(e);
-        return ResponseEntity.ok(endereco);
+    @PutMapping("{id}")
+    public ResponseEntity<Endereco> update(@PathVariable UUID id, @RequestBody Endereco endereco) {
+        var updateEndereco = service.update(id, endereco);
+        return ResponseEntity.ok(updateEndereco);
     }
 
     @DeleteMapping("{id}")

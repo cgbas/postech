@@ -5,8 +5,10 @@ import br.com.fiap.techchallenge.domain.eletrodomestico.service.EletrodomesticoS
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.HashSet;
+import java.net.URI;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,7 +20,7 @@ public class EletromesticosController {
     private EletrodomesticoService service;
 
     @GetMapping
-    public ResponseEntity<HashSet<Eletrodomestico>> findAll() {
+    public ResponseEntity<Collection<Eletrodomestico>> findAll() {
         var eletrodomesticos = service.findAll();
         return ResponseEntity.ok(eletrodomesticos);
     }
@@ -30,15 +32,17 @@ public class EletromesticosController {
     }
 
     @PostMapping
-    public ResponseEntity<Eletrodomestico> save(@RequestBody Eletrodomestico e) {
-        service.save(e);
-        return ResponseEntity.ok(e);
+    public ResponseEntity<Eletrodomestico> save(@RequestBody Eletrodomestico eletrodomestico) {
+        var saveEletrodomestico = service.save(eletrodomestico);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(saveEletrodomestico.getId()).toUri();
+        return ResponseEntity.created(uri).body(saveEletrodomestico);
     }
 
-    @PutMapping
-    public ResponseEntity<Optional<Eletrodomestico>> update(@RequestBody Eletrodomestico e) {
-        Optional<Eletrodomestico> eletrodomestico = service.update(e);
-        return ResponseEntity.ok(eletrodomestico);
+    @PutMapping("{id}")
+    public ResponseEntity<Eletrodomestico> update(@PathVariable UUID id, @RequestBody Eletrodomestico eletrodomestico) {
+        var updateEletrodomestico = service.update(id, eletrodomestico);
+        return ResponseEntity.ok(updateEletrodomestico);
     }
 
     @DeleteMapping("{id}")
