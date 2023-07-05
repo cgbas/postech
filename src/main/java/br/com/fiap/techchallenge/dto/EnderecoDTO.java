@@ -2,6 +2,7 @@ package br.com.fiap.techchallenge.dto;
 
 import br.com.fiap.techchallenge.entity.Endereco;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.util.UUID;
@@ -11,8 +12,8 @@ public class EnderecoDTO {
     @NotBlank(message = "Informe o Nome.")
     private String logradouro;
     @Positive(message = "Número deve ser positivo.")
-    @NotBlank(message = "Informe o Número.")
-    private int numero;
+    @NotNull(message = "Informe o Número.")
+    private Integer numero;
     @NotBlank(message = "Informe o Bairro.")
     private String bairro;
     @NotBlank(message = "Informe a Cidade.")
