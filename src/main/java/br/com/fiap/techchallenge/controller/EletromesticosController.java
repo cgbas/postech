@@ -1,14 +1,15 @@
 package br.com.fiap.techchallenge.controller;
 
-import br.com.fiap.techchallenge.entity.Eletrodomestico;
+import br.com.fiap.techchallenge.dto.EletrodomesticoDTO;
 import br.com.fiap.techchallenge.service.EletrodomesticoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Collection;
 import java.util.UUID;
 
 @RestController
@@ -19,19 +20,23 @@ public class EletromesticosController {
     private EletrodomesticoService service;
 
     @GetMapping
-    public ResponseEntity<Collection<Eletrodomestico>> findAll() {
-        var eletrodomesticos = service.findAll();
+    public ResponseEntity<Page<EletrodomesticoDTO>> findAll(
+            @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
+            @RequestParam(value = "tamanho", defaultValue = "10") Integer tamanho
+    ) {
+        PageRequest pageRequest = PageRequest.of(pagina, tamanho);
+        var eletrodomesticos = service.findAll(pageRequest);
         return ResponseEntity.ok(eletrodomesticos);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Eletrodomestico> findById(@PathVariable UUID id) {
+    public ResponseEntity<EletrodomesticoDTO> findById(@PathVariable UUID id) {
         var eletrodomestico = service.findById(id);
         return ResponseEntity.ok(eletrodomestico);
     }
 
     @PostMapping
-    public ResponseEntity<Eletrodomestico> save(@RequestBody Eletrodomestico eletrodomestico) {
+    public ResponseEntity<EletrodomesticoDTO> save(@RequestBody EletrodomesticoDTO eletrodomestico) {
         var saveEletrodomestico = service.save(eletrodomestico);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(saveEletrodomestico.getId()).toUri();
@@ -39,7 +44,7 @@ public class EletromesticosController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Eletrodomestico> update(@PathVariable UUID id, @RequestBody Eletrodomestico eletrodomestico) {
+    public ResponseEntity<EletrodomesticoDTO> update(@PathVariable UUID id, @RequestBody EletrodomesticoDTO eletrodomestico) {
         var updateEletrodomestico = service.update(id, eletrodomestico);
         return ResponseEntity.ok(updateEletrodomestico);
     }
