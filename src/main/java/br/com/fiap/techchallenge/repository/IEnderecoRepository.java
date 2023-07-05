@@ -1,6 +1,6 @@
-package br.com.fiap.techchallenge.domain.endereco.repository;
+package br.com.fiap.techchallenge.repository;
 
-import br.com.fiap.techchallenge.domain.endereco.entity.Endereco;
+import br.com.fiap.techchallenge.entity.Endereco;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 

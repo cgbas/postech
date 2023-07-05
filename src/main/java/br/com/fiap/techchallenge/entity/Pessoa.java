@@ -1,6 +1,6 @@
-package br.com.fiap.techchallenge.domain.pessoa.entity;
+package br.com.fiap.techchallenge.entity;
 
-import br.com.fiap.techchallenge.domain.pessoa.enums.Sexo;
+import br.com.fiap.techchallenge.enums.Sexo;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;

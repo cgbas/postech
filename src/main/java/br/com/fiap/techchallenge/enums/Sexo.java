@@ -1,4 +1,4 @@
-package br.com.fiap.techchallenge.domain.pessoa.enums;
+package br.com.fiap.techchallenge.enums;
 
 public enum Sexo {
     MASCULINO,

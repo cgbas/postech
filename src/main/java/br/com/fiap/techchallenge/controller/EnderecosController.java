@@ -1,8 +1,8 @@
-package br.com.fiap.techchallenge.domain.endereco.controller;
+package br.com.fiap.techchallenge.controller;
 
 
-import br.com.fiap.techchallenge.domain.endereco.entity.Endereco;
-import br.com.fiap.techchallenge.domain.endereco.service.EnderecoService;
+import br.com.fiap.techchallenge.entity.Endereco;
+import br.com.fiap.techchallenge.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Collection;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -27,7 +26,7 @@ public class EnderecosController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Endereco>> findById(@PathVariable UUID id) {
+    public ResponseEntity<Endereco> findById(@PathVariable UUID id) {
         var endereco = service.findById(id);
         return ResponseEntity.ok(endereco);
     }
