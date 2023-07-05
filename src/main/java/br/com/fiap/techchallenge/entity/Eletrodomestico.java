@@ -1,4 +1,4 @@
-package br.com.fiap.techchallenge.domain.eletrodomestico.entity;
+package br.com.fiap.techchallenge.entity;
 
 
 import jakarta.persistence.*;

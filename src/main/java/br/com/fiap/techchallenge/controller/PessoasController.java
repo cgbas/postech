@@ -1,7 +1,7 @@
-package br.com.fiap.techchallenge.domain.pessoa.controller;
+package br.com.fiap.techchallenge.controller;
 
-import br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa;
-import br.com.fiap.techchallenge.domain.pessoa.service.PessoaService;
+import br.com.fiap.techchallenge.entity.Pessoa;
+import br.com.fiap.techchallenge.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +9,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Collection;
-import java.util.Optional;
 import java.util.UUID;
 
 
@@ -27,7 +26,7 @@ public class PessoasController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Pessoa>> findById(@PathVariable UUID id) {
+    public ResponseEntity<Pessoa> findById(@PathVariable UUID id) {
         var pessoa = service.findById(id);
         return ResponseEntity.ok(pessoa);
     }

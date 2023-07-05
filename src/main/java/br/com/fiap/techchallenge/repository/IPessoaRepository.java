@@ -1,6 +1,6 @@
-package br.com.fiap.techchallenge.domain.pessoa.repository;
+package br.com.fiap.techchallenge.repository;
 
-import br.com.fiap.techchallenge.domain.pessoa.entity.Pessoa;
+import br.com.fiap.techchallenge.entity.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 

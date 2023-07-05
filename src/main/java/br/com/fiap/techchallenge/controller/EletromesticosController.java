@@ -1,7 +1,7 @@
-package br.com.fiap.techchallenge.domain.eletrodomestico.controller;
+package br.com.fiap.techchallenge.controller;
 
-import br.com.fiap.techchallenge.domain.eletrodomestico.entity.Eletrodomestico;
-import br.com.fiap.techchallenge.domain.eletrodomestico.service.EletrodomesticoService;
+import br.com.fiap.techchallenge.entity.Eletrodomestico;
+import br.com.fiap.techchallenge.service.EletrodomesticoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +9,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Collection;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -26,7 +25,7 @@ public class EletromesticosController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Eletrodomestico>> findById(@PathVariable UUID id) {
+    public ResponseEntity<Eletrodomestico> findById(@PathVariable UUID id) {
         var eletrodomestico = service.findById(id);
         return ResponseEntity.ok(eletrodomestico);
     }
