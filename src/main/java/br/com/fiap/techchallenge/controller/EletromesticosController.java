@@ -2,6 +2,7 @@ package br.com.fiap.techchallenge.controller;
 
 import br.com.fiap.techchallenge.dto.EletrodomesticoDTO;
 import br.com.fiap.techchallenge.service.EletrodomesticoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,7 +37,7 @@ public class EletromesticosController {
     }
 
     @PostMapping
-    public ResponseEntity<EletrodomesticoDTO> save(@RequestBody EletrodomesticoDTO eletrodomestico) {
+    public ResponseEntity<EletrodomesticoDTO> save(@Valid @RequestBody EletrodomesticoDTO eletrodomestico) {
         var saveEletrodomestico = service.save(eletrodomestico);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(saveEletrodomestico.getId()).toUri();
@@ -44,7 +45,7 @@ public class EletromesticosController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<EletrodomesticoDTO> update(@PathVariable UUID id, @RequestBody EletrodomesticoDTO eletrodomestico) {
+    public ResponseEntity<EletrodomesticoDTO> update(@Valid @PathVariable UUID id, @RequestBody EletrodomesticoDTO eletrodomestico) {
         var updateEletrodomestico = service.update(id, eletrodomestico);
         return ResponseEntity.ok(updateEletrodomestico);
     }

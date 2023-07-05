@@ -2,6 +2,7 @@ package br.com.fiap.techchallenge.dto;
 
 import br.com.fiap.techchallenge.entity.Pessoa;
 import br.com.fiap.techchallenge.enums.Sexo;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -9,9 +10,14 @@ import java.util.UUID;
 public class PessoaDTO {
 
     private UUID id;
+    @NotBlank(message = "Informe o nome.")
     private String nome;
+    @PastOrPresent(message = "Informe uma data de nascimento válida.")
     private LocalDate dataDeNascimento;
+
+    @NotNull(message = "Sexo não pode ser nulo.")
     private Sexo sexo;
+    @NotBlank(message = "Informe o parentesco.")
     private String parentesco;
 
     public PessoaDTO() {

@@ -2,6 +2,7 @@ package br.com.fiap.techchallenge.controller;
 
 import br.com.fiap.techchallenge.dto.PessoaDTO;
 import br.com.fiap.techchallenge.service.PessoaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,7 +38,7 @@ public class PessoasController {
     }
 
     @PostMapping
-    public ResponseEntity<PessoaDTO> save(@RequestBody PessoaDTO pessoa){
+    public ResponseEntity<PessoaDTO> save(@Valid @RequestBody PessoaDTO pessoa){
         var savePessoa = service.save(pessoa);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(savePessoa.getId()).toUri();
@@ -45,7 +46,7 @@ public class PessoasController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<PessoaDTO> update(@PathVariable UUID id, @RequestBody PessoaDTO pessoa) {
+    public ResponseEntity<PessoaDTO> update(@Valid @PathVariable UUID id, @RequestBody PessoaDTO pessoa) {
         var pessoaUpdate = service.update(id, pessoa);
         return ResponseEntity.ok(pessoaUpdate);
     }

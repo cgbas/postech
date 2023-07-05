@@ -3,6 +3,7 @@ package br.com.fiap.techchallenge.controller;
 
 import br.com.fiap.techchallenge.dto.EnderecoDTO;
 import br.com.fiap.techchallenge.service.EnderecoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,7 +38,7 @@ public class EnderecosController {
     }
 
     @PostMapping
-    public ResponseEntity<EnderecoDTO> save(@RequestBody EnderecoDTO endereco) {
+    public ResponseEntity<EnderecoDTO> save(@Valid @RequestBody EnderecoDTO endereco) {
         var saveEndereco = service.save(endereco);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(saveEndereco.getId()).toUri();
@@ -45,7 +46,7 @@ public class EnderecosController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<EnderecoDTO> update(@PathVariable UUID id, @RequestBody EnderecoDTO endereco) {
+    public ResponseEntity<EnderecoDTO> update(@Valid @PathVariable UUID id, @RequestBody EnderecoDTO endereco) {
         var updateEndereco = service.update(id, endereco);
         return ResponseEntity.ok(updateEndereco);
     }

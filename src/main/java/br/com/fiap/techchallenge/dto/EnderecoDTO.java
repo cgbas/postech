@@ -1,15 +1,23 @@
 package br.com.fiap.techchallenge.dto;
 
 import br.com.fiap.techchallenge.entity.Endereco;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 import java.util.UUID;
 
 public class EnderecoDTO {
     private UUID id;
+    @NotBlank(message = "Informe o Nome.")
     private String logradouro;
+    @Positive(message = "Número deve ser positivo.")
+    @NotBlank(message = "Informe o Número.")
     private int numero;
+    @NotBlank(message = "Informe o Bairro.")
     private String bairro;
+    @NotBlank(message = "Informe a Cidade.")
     private String cidade;
+    @NotBlank(message = "Informe o Estado.")
     private String estado;
 
     public EnderecoDTO() {
