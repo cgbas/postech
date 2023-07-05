@@ -1,14 +1,15 @@
 package br.com.fiap.techchallenge.service;
 
+import br.com.fiap.techchallenge.dto.PessoaDTO;
 import br.com.fiap.techchallenge.entity.Pessoa;
 import br.com.fiap.techchallenge.repository.IPessoaRepository;
 import br.com.fiap.techchallenge.service.exception.ControllerNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
 import java.util.UUID;
 
 @Slf4j
@@ -18,20 +19,28 @@ public class PessoaService {
     @Autowired
     private IPessoaRepository repo;
 
-    public Collection<Pessoa> findAll(){
-        return repo.findAll();
+    public Page<PessoaDTO> findAll(PageRequest pageRequest){
+        var buscaPessoa = repo.findAll(pageRequest);
+        return buscaPessoa.map(PessoaDTO::new);
     }
 
-    public Pessoa findById(UUID id){
-       return repo.findById(id).orElseThrow(() -> new ControllerNotFoundException("Produto não encontrado"));
+    public PessoaDTO findById(UUID id){
+       var buscaPessoa = repo.findById(id)
+               .orElseThrow(() -> new ControllerNotFoundException("Produto não encontrado"));
+       return new PessoaDTO(buscaPessoa);
     }
 
-    public Pessoa save(Pessoa pessoa){
-
-        return  repo.save(pessoa);
+    public PessoaDTO save(PessoaDTO pessoa){
+        var salvaPessoa = new Pessoa()
+                .setNome(pessoa.getNome())
+                .setDataDeNascimento(pessoa.getDataDeNascimento())
+                .setSexo(pessoa.getSexo())
+                .setParentesco(pessoa.getParentesco());
+        salvaPessoa = repo.save(salvaPessoa);
+        return new PessoaDTO(salvaPessoa);
     }
 
-    public Pessoa update(UUID id, Pessoa pessoa) {
+    public PessoaDTO update(UUID id, PessoaDTO pessoa) {
         try {
             var buscaPessoa = repo.getReferenceById(id);
             buscaPessoa
@@ -41,7 +50,7 @@ public class PessoaService {
                     .setDataDeNascimento(pessoa.getDataDeNascimento());
 
             buscaPessoa = repo.save(buscaPessoa);
-            return buscaPessoa;
+            return new PessoaDTO(buscaPessoa);
         } catch (EntityNotFoundException exception) {
             throw new ControllerNotFoundException("Produto não encontrado pelo id: " + id);
         }

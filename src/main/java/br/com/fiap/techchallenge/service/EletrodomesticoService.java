@@ -54,7 +54,6 @@ public class EletrodomesticoService {
         } catch (EntityNotFoundException exception){
             throw new ControllerNotFoundException("Pessoa não encontrada pelo id: " + id);
         }
-
     }
 
     public void delete(UUID id) {

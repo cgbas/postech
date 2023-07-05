@@ -1,14 +1,15 @@
 package br.com.fiap.techchallenge.controller;
 
-import br.com.fiap.techchallenge.entity.Pessoa;
+import br.com.fiap.techchallenge.dto.PessoaDTO;
 import br.com.fiap.techchallenge.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Collection;
 import java.util.UUID;
 
 
@@ -20,19 +21,23 @@ public class PessoasController {
     private PessoaService service;
 
     @GetMapping
-    public ResponseEntity<Collection<Pessoa>> findAll(){
-        var pessoas = service.findAll();
+    public ResponseEntity<Page<PessoaDTO>> findAll(
+            @RequestParam(value = "pagina", defaultValue = "0") Integer pagina,
+            @RequestParam(value = "tamanho", defaultValue = "10") Integer tamanho
+    ) {
+        PageRequest pageRequest = PageRequest.of(pagina, tamanho);
+        var pessoas = service.findAll(pageRequest);
         return ResponseEntity.ok(pessoas);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Pessoa> findById(@PathVariable UUID id) {
+    public ResponseEntity<PessoaDTO> findById(@PathVariable UUID id) {
         var pessoa = service.findById(id);
         return ResponseEntity.ok(pessoa);
     }
 
     @PostMapping
-    public ResponseEntity<Pessoa> save(@RequestBody Pessoa pessoa){
+    public ResponseEntity<PessoaDTO> save(@RequestBody PessoaDTO pessoa){
         var savePessoa = service.save(pessoa);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(savePessoa.getId()).toUri();
@@ -40,7 +45,7 @@ public class PessoasController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Pessoa> update(@PathVariable UUID id, @RequestBody Pessoa pessoa) {
+    public ResponseEntity<PessoaDTO> update(@PathVariable UUID id, @RequestBody PessoaDTO pessoa) {
         var pessoaUpdate = service.update(id, pessoa);
         return ResponseEntity.ok(pessoaUpdate);
     }
