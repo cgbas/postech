@@ -468,7 +468,7 @@ http://localhost:8080/eletrodomesticos/bd623d98-223a-45f8-81a5-bb7dd7212577
 
 #### DELETE /eletrodomesticos/{id}
 
-Remove um endereço específico caso o ID seja válido.
+Remove um eletrodoméstico específico caso o ID seja válido.
 
 **Exemplo de URL**:
 
