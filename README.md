@@ -155,11 +155,11 @@ http://localhost:8080/pessoas/7da3de20-c8fb-45ca-807e-89a8d95ba769
 
 ```json
 {
-	"id": "7da3de20-c8fb-45ca-807e-89a8d95ba769",
-	"nome": "Bruna Lanzoni Muñoz",
-	"dataDeNascimento": "1993-12-21",
-	"sexo": "FEMININO",
-	"parentesco": "Esposa"
+    "id": "7da3de20-c8fb-45ca-807e-89a8d95ba769",
+    "nome": "Bruna Maria",
+    "sexo": 1,
+    "dataDeNascimento": "1983-12-21",
+    "parentesco": "Esposa"
 }
 ```
 
