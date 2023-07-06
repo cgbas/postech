@@ -167,6 +167,12 @@ http://localhost:8080/pessoas/7da3de20-c8fb-45ca-807e-89a8d95ba769
 
 Remove uma pessoa específica caso o ID seja válido.
 
+**Exemplo de URL:**
+```shell
+#url
+http://localhost:8080/pessoas/7da3de20-c8fb-45ca-807e-89a8d95ba769
+```
+
 ### Endereços
 
 #### GET /enderecos
@@ -382,9 +388,11 @@ Exemplo de resposta:
 #### GET /eletrodomesticos/{id}
 Retorna uma eletrodoméstico específico caso o ID seja válido.
 
-**Request**:
-
+**Exemplo de URL**
+```shell
+#url
 http://localhost:8080/eletrodomesticos/11a05bc1-cc36-454f-9285-ca89aaee71cb
+```
 
 **Resposta**:
 
