@@ -98,6 +98,7 @@ Insere uma nova pessoa no sistema.
   - 0 = masculino
   - 1 = feminino
   - 2 = outro
+- parentesco (String)
 
 **Exemplo de RequestBody:**
 
@@ -133,6 +134,7 @@ Atualiza um registro de pessoa caso o ID seja válido.
     - 0 = masculino
     - 1 = feminino
     - 2 = outro
+- parentesco (String)
 
 **Exemplo de URL e RequestBody:**
 ```shell
