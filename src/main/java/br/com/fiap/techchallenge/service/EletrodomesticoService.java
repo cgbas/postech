@@ -4,9 +4,12 @@ import br.com.fiap.techchallenge.dto.EletrodomesticoDTO;
 import br.com.fiap.techchallenge.entity.Eletrodomestico;
 import br.com.fiap.techchallenge.repository.IEletrodomesticoRepository;
 import br.com.fiap.techchallenge.service.exception.ControllerNotFoundException;
+import br.com.fiap.techchallenge.service.exception.DatabaseException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -57,6 +60,12 @@ public class EletrodomesticoService {
     }
 
     public void delete(UUID id) {
-        repo.deleteById(id);
+        try {
+            repo.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new EntityNotFoundException("Eletrodoméstico não encontrado pelo id: " + id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Violação de integridade da base");
+        }
     }
 }

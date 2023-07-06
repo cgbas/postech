@@ -10,15 +10,19 @@ import java.util.UUID;
 public class EnderecoDTO {
     private UUID id;
     @NotBlank(message = "Informe o Nome.")
+    @NotNull(message = "Campo obrigatório.")
     private String logradouro;
     @Positive(message = "Número deve ser positivo.")
-    @NotNull(message = "Informe o Número.")
+    @NotNull(message = "Campo obrigatório.")
     private Integer numero;
-    @NotBlank(message = "Informe o Bairro.")
+    @NotBlank(message = "Bairro não pode ser vazio.")
+    @NotNull(message = "Campo obrigatório.")
     private String bairro;
-    @NotBlank(message = "Informe a Cidade.")
+    @NotBlank(message = "Cidade não pode ser vazio.")
+    @NotNull(message = "Campo obrigatório.")
     private String cidade;
-    @NotBlank(message = "Informe o Estado.")
+    @NotBlank(message = "Estado não pode ser vazio.")
+    @NotNull(message = "Campo obrigatório.")
     private String estado;
 
     public EnderecoDTO() {

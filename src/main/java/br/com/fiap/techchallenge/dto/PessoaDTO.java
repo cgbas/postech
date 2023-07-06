@@ -11,13 +11,17 @@ public class PessoaDTO {
 
     private UUID id;
     @NotBlank(message = "Informe o nome.")
+    @NotNull(message = "Campo obrigatório.")
     private String nome;
     @PastOrPresent(message = "Informe uma data de nascimento válida.")
+    @NotNull(message = "Campo obrigatório.")
     private LocalDate dataDeNascimento;
 
     @NotNull(message = "Sexo não pode ser nulo.")
+    @NotNull(message = "Campo obrigatório.")
     private Sexo sexo;
     @NotBlank(message = "Informe o parentesco.")
+    @NotNull(message = "Campo obrigatório.")
     private String parentesco;
 
     public PessoaDTO() {
