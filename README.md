@@ -13,16 +13,176 @@ Há uma collection do insomnia com exemplos de chamada disponível [aqui](Insomn
 ### Pessoas
 
 #### GET /pessoas
-- Retorna todas as pessoas ou uma lista vazia caso não exista nenhuma pessoa cadastrada. 
-- Resultado está paginado.
 
-Exemplo de chamada:
+Retorna todas as pessoas ou uma lista vazia caso não exista nenhuma. 
+Resultado está paginado.
 
-http://localhost:8080/pessoas/
+**Exemplo de ResponseBody**:
 
-Exemplo de resposta:
-
+```json
+{
+	"content": [
+		{
+			"id": "1f061460-4c97-4252-9ba2-60060b5c3306",
+			"nome": "Juliana Silva",
+			"dataDeNascimento": "1990-09-13",
+			"sexo": "FEMININO",
+			"parentesco": "Tia"
+		},
+		{
+			"id": "35ab0b61-81c4-400b-99f7-8704a8e2be23",
+			"nome": "Paulo Silva",
+			"dataDeNascimento": "1982-09-13",
+			"sexo": "MASCULINO",
+			"parentesco": "Tio"
+		}
+	],
+	"pageable": {
+		"sort": {
+			"empty": true,
+			"sorted": false,
+			"unsorted": true
+		},
+		"offset": 0,
+		"pageNumber": 0,
+		"pageSize": 10,
+		"paged": true,
+		"unpaged": false
+	},
+	"last": true,
+	"totalPages": 1,
+	"totalElements": 2,
+	"first": true,
+	"size": 10,
+	"number": 0,
+	"sort": {
+		"empty": true,
+		"sorted": false,
+		"unsorted": true
+	},
+	"numberOfElements": 2,
+	"empty": false
+}
 ```
+
+#### GET /pessoas/{id}
+Retorna uma pessoa específica caso o ID seja válido.
+
+**Exemplo de URL:**
+
+```shell
+#url
+http://localhost:8080/pessoas/1f061460-4c97-4252-9ba2-60060b5c3306
+```
+
+**Exemplo de ResponseBody**:
+
+```json
+{
+  "id": "1f061460-4c97-4252-9ba2-60060b5c3306",
+  "nome": "Juliana Silva",
+  "dataDeNascimento": "1990-09-13",
+  "sexo": "FEMININO",
+  "parentesco": "Tia"
+}
+```
+
+#### POST /pessoas
+Insere uma nova pessoa no sistema.
+
+**Campos obrigatórios:**
+- nome (String)
+- dataDeNascimento (LocalDate)
+  - Formato: _YYYY-MM-DD_
+- sexo (Enum)
+  - 0 = masculino
+  - 1 = feminino
+  - 2 = outro
+- parentesco (String)
+
+**Exemplo de RequestBody:**
+
+```json
+{
+  "nome": "Paulo Silva",
+  "dataDeNascimento": "1982-09-13",
+  "sexo": 0,
+  "parentesco": "Tio"
+}
+```
+**Exemplo de ResponseBody**: 
+
+```json
+{
+  "id": "35ab0b61-81c4-400b-99f7-8704a8e2be23",
+  "nome": "Paulo Silva",
+  "dataDeNascimento": "1982-09-13",
+  "sexo": "MASCULINO",
+  "parentesco": "Tia"
+}
+```
+
+#### PUT /pessoas/{id}
+
+Atualiza um registro de pessoa caso o ID seja válido.
+
+**Campos obrigatórios:**
+- nome (String)
+- dataDeNascimento (LocalDate)
+    - Formato: _YYYY-MM-DD_
+- sexo (Enum)
+    - 0 = masculino
+    - 1 = feminino
+    - 2 = outro
+- parentesco (String)
+
+**Exemplo de URL e RequestBody:**
+```shell
+#url
+http://localhost:8080/pessoas/7da3de20-c8fb-45ca-807e-89a8d95ba769
+```
+
+
+```json
+{
+    "nome": "Bruna Maria",
+    "sexo": 1,
+    "dataDeNascimento": "1983-12-21",
+    "parentesco": "Esposa"
+}
+```
+**Exemplo de ResponseBody**:
+
+```json
+{
+	"id": "7da3de20-c8fb-45ca-807e-89a8d95ba769",
+	"nome": "Bruna Lanzoni Muñoz",
+	"dataDeNascimento": "1993-12-21",
+	"sexo": "FEMININO",
+	"parentesco": "Esposa"
+}
+```
+
+#### DELETE /pessoas/{id}
+
+Remove uma pessoa específica caso o ID seja válido.
+
+**Exemplo de URL:**
+```shell
+#url
+http://localhost:8080/pessoas/7da3de20-c8fb-45ca-807e-89a8d95ba769
+```
+
+### Endereços
+
+#### GET /enderecos
+
+Retorna todas os endereços ou uma lista vazia caso não exista nenhum.
+Resultado está paginado.
+
+**Exemplo de ResponseBody**:
+
+```json
 {
 	"content": [
 		{
@@ -70,12 +230,9 @@ Exemplo de resposta:
 }
 ```
 
-#### GET /pessoas/{id}
-- Retorna uma pessoa específica.
+#### GET /enderecos/{id}
 
-**Request**:
-
-http://localhost:8080/pessoas/e211d266-fa4a-494c-8448-4831d1c02cdd
+Retorna um endereço específico caso o ID seja válido.
 
 **Resposta**:
 
@@ -90,8 +247,9 @@ http://localhost:8080/pessoas/e211d266-fa4a-494c-8448-4831d1c02cdd
 }
 ```
 
-#### POST /pessoas
-- Insere uma nova pessoa no sistema.
+#### POST /enderecos
+
+Insere um novo endereço no sistema.
 
 Campos obrigatórios:
 - logradouro (String)
@@ -101,9 +259,7 @@ Campos obrigatórios:
 - estado (String)
 
 
-**Exemplo de Request:**
-
-http://localhost:8080/pessoas
+**Exemplo de RequestBody:**
 
 ```json
 {
@@ -114,7 +270,7 @@ http://localhost:8080/pessoas
 			"estado": "São Paulo"
 }
 ```
-**Resposta**: 
+**Resposta**:
 
 ```json
 {
@@ -127,13 +283,18 @@ http://localhost:8080/pessoas
 }
 ```
 
-#### PUT /pessoas/{id}
-- Atualiza um registro de pessoa.
+#### PUT /enderecos/{id}
 
-**Exemplo de Request:**
+Atualiza um endereço caso o ID seja válido.
 
-http://localhost:8080/e211d266-fa4a-494c-8448-4831d1c02cdd
+**Campos obrigatórios**:
+- logradouro (String)
+- número (int)
+- bairro (String)
+- cidade (String)
+- estado (String)
 
+**Exemplo de RequestBody:**
 ```json
 {
   "logradouro": "Avenida Tubarão",
@@ -155,30 +316,166 @@ http://localhost:8080/e211d266-fa4a-494c-8448-4831d1c02cdd
 }
 ```
 
-#### DELETE /pessoas/{id}
-
-- Remove uma pessoa específica.
-
-**Request**:
-
-http://localhost:8080/pessoas/e211d266-fa4a-494c-8448-4831d1c02cdd
-
-
-### Endereços
-
-#### GET /enderecos
-#### GET /enderecos/{id}
-#### POST /enderecos
-#### PUT /enderecos/{id}
 #### DELETE /enderecos/{id}
+
+Remove uma endereço específico caso o ID seja válido.
+
+**Exemplo de URL**
+```shell
+#url
+http://localhost:8080/enderecos/7da3de20-c8fb-45ca-807e-89a8d95ba769
+```
 
 ### Eletrodomésticos
 
 #### GET /eletrodomesticos
+- Retorna todas os eletrodomésticos ou uma lista vazia caso não exista nenhum.
+- Resultado está paginado.
+
+
+Exemplo de resposta:
+
+```json
+{
+  "content": [
+    {
+      "id": "11a05bc1-cc36-454f-9285-ca89aaee71cb",
+      "nome": "Furadeira Xing",
+      "modelo": "HT1678DX",
+      "watts": 900
+    },
+    {
+      "id": "d26addb7-5a89-4ac4-876e-c2cf588622bc",
+      "nome": "Furadeira ASDFG",
+      "modelo": "HP1666K",
+      "watts": 500
+    },
+    {
+      "id": "15c7a4e2-e12b-47e2-81c9-ee9cc71b4e9d",
+      "nome": "Furadeira Makita",
+      "modelo": "HP1630K",
+      "watts": 710
+    }
+  ],
+  "pageable": {
+    "sort": {
+      "empty": true,
+      "sorted": false,
+      "unsorted": true
+    },
+    "offset": 0,
+    "pageNumber": 0,
+    "pageSize": 10,
+    "paged": true,
+    "unpaged": false
+  },
+  "last": true,
+  "totalPages": 1,
+  "totalElements": 3,
+  "first": true,
+  "size": 10,
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": false,
+    "unsorted": true
+  },
+  "numberOfElements": 3,
+  "empty": false
+}
+```
+
 #### GET /eletrodomesticos/{id}
+Retorna uma eletrodoméstico específico caso o ID seja válido.
+
+**Exemplo de URL**
+```shell
+#url
+http://localhost:8080/eletrodomesticos/11a05bc1-cc36-454f-9285-ca89aaee71cb
+```
+
+**Resposta**:
+
+```json
+{
+	"id": "11a05bc1-cc36-454f-9285-ca89aaee71cb",
+	"nome": "Furadeira Makita",
+	"modelo": "HP1630K",
+	"watts": 710
+}
+```
+
 #### POST /eletrodomesticos
+- Insere uma novo eletrodoméstico no sistema.
+
+**Campos obrigatórios:**
+- Nome (String)
+- Modelo (String)
+- Watts (Integer)
+
+**Exemplo de RequestBody:**
+
+```json
+{
+    "nome": "Furadeira Makita",
+    "modelo": "HP1630K",
+    "watts": 710
+}
+```
+**Resposta**:
+
+```json
+{
+	"id": "bd623d98-223a-45f8-81a5-bb7dd7212577",
+	"nome": "Furadeira Makita",
+	"modelo": "HP1630K",
+	"watts": 710
+}
+```
+
 #### PUT /eletrodomesticos/{id}
+Atualiza um registro de eletrodoméstico.
+
+**Campos obrigatórios:**
+- Nome (String)
+- Modelo (String)
+- Watts (Integer)
+
+**Exemplo de URL e RequestBody**:
+
+```shell
+#url
+http://localhost:8080/eletrodomesticos/bd623d98-223a-45f8-81a5-bb7dd7212577
+```
+
+```json
+{
+	"nome": "Furadeira Black & Decker",
+	"modelo": "HP1630K",
+	"watts": 500
+}
+```
+**Resposta**:
+
+```json
+{
+	"id": "bd623d98-223a-45f8-81a5-bb7dd7212577",
+	"nome": "Furadeira Black & Decker",
+	"modelo": "TM500KB9",
+	"watts": 500
+}
+```
+
 #### DELETE /eletrodomesticos/{id}
+
+Remove um endereço específico caso o ID seja válido.
+
+**Exemplo de URL**:
+
+```shell
+#url
+http://localhost:8080/eletrodomesticos/bd623d98-223a-45f8-81a5-bb7dd7212577
+```
 
 ## Outros
 
@@ -199,7 +496,6 @@ Os dados de conexão (url, username e password) podem ser encontrados [aqui](src
 - H2
 - Maven 3.1.1
 - Java17 (corretto)
-- Spring Actuator
 
 ### Dificuldades encontradas
 

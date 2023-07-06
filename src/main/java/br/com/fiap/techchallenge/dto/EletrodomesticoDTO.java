@@ -2,6 +2,7 @@ package br.com.fiap.techchallenge.dto;
 
 import br.com.fiap.techchallenge.entity.Eletrodomestico;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.util.UUID;
@@ -9,10 +10,13 @@ import java.util.UUID;
 public class EletrodomesticoDTO {
     private UUID id;
     @NotBlank(message = "Informe o Nome.")
+    @NotNull(message = "Campo obrigatório.")
     private String nome;
     @NotBlank(message = "Informe o Modelo")
+    @NotNull(message = "Campo obrigatório.")
     private String modelo;
     @Positive(message = "Potência deve ser um número positivo.")
+    @NotNull(message = "Campo obrigatório.")
     private int watts;
 
     public EletrodomesticoDTO() {
