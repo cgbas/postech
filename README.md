@@ -90,6 +90,15 @@ http://localhost:8080/pessoas/1f061460-4c97-4252-9ba2-60060b5c3306
 #### POST /pessoas
 Insere uma nova pessoa no sistema.
 
+**Campos obrigatórios:**
+- nome (String)
+- dataDeNascimento (LocalDate)
+  - Formato: _YYYY-MM-DD_
+- sexo (Enum)
+  - 0 = masculino
+  - 1 = feminino
+  - 2 = outro
+
 **Exemplo de RequestBody:**
 
 ```json
@@ -113,7 +122,17 @@ Insere uma nova pessoa no sistema.
 ```
 
 #### PUT /pessoas/{id}
+
 Atualiza um registro de pessoa caso o ID seja válido.
+
+**Campos obrigatórios:**
+- nome (String)
+- dataDeNascimento (LocalDate)
+    - Formato: _YYYY-MM-DD_
+- sexo (Enum)
+    - 0 = masculino
+    - 1 = feminino
+    - 2 = outro
 
 **Exemplo de URL e RequestBody:**
 ```shell
