@@ -62,7 +62,7 @@ public class EnderecoService {
     }
 
 
-    public void delete(UUID id) {
+    public void deleteById(UUID id) {
         try {
             repo.deleteById(id);
         } catch (EmptyResultDataAccessException e) {

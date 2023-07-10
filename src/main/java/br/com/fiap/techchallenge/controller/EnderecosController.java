@@ -52,8 +52,8 @@ public class EnderecosController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity delete(@PathVariable UUID id) {
-        service.delete(id);
+    public ResponseEntity<Void> deleteById(@PathVariable UUID id) {
+        service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -4,6 +4,7 @@ import br.com.fiap.techchallenge.service.exception.ControllerNotFoundException;
 import br.com.fiap.techchallenge.service.exception.DatabaseException;
 import br.com.fiap.techchallenge.service.exception.DefaultError;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -57,4 +58,18 @@ public class ControllerExceptionHandler {
 
         return ResponseEntity.status(status).body(validacaoForm);
     }
+
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public ResponseEntity<DefaultError> handleRecordNotFound(EmptyResultDataAccessException exception, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        error
+                .setTimestamp(Instant.now())
+                .setError("ID não encontrado.")
+                .setMessage(exception.getMessage())
+                .setPath(request.getRequestURI())
+                .setStatus(status.value());
+        return ResponseEntity.status(status).body((error));
+    }
+
+
 }
